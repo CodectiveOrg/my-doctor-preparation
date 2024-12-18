@@ -12,6 +12,8 @@
     grid-area: writings;
 
     .logo {
+      margin-block-end: 0.25rem;
+
       font-size: 2rem;
       font-weight: 700;
     }
