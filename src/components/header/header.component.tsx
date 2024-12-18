@@ -14,7 +14,6 @@ export default function HeaderComponent(): ReactElement {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>دکتر من</div>
       <nav>
         <ul>
           <li>
@@ -32,6 +31,7 @@ export default function HeaderComponent(): ReactElement {
           </li>
         </ul>
       </nav>
+      <button className={styles.cta}>ورود | ثبت‌نام</button>
     </header>
   );
 }

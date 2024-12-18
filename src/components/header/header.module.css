@@ -5,14 +5,7 @@
 
   padding-block: 1rem;
 
-  .logo {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
   nav {
-    margin-inline-start: auto;
-
     > ul {
       display: flex;
       gap: 2rem;
@@ -24,6 +17,26 @@
           }
         }
       }
+    }
+  }
+
+  .cta {
+    background-color: transparent;
+    color: var(--color-primary);
+
+    margin-inline-start: auto;
+    padding: 0.5rem 1rem;
+
+    border: 1px solid currentcolor;
+    border-radius: var(--border-radius);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-primary-opposite);
     }
   }
 }
