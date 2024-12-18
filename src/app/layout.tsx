@@ -8,7 +8,7 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title:  "دکتر من",
+  title: "دکتر من",
   description: "پلتفرم جامع جستجوی دکتر و رزرو نوبت آنلاین",
 };
 
