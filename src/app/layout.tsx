@@ -1,5 +1,10 @@
+import { ReactElement } from "react";
+
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+
+import HeaderComponent from "@/components/header/header.component";
+
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -16,11 +21,11 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): ReactElement {
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.className}>
       <body>
-        <header>This is a header by Reza</header>
+        <HeaderComponent />
         {children}
       </body>
     </html>

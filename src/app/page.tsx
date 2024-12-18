@@ -1,23 +1,5 @@
-type Post = {
-  id: number;
-  title: string;
-};
+import { ReactElement } from "react";
 
-export default async function Home() {
-  const res = await fetch("https://jsonplaceholder.org/posts", {
-    cache: "no-store",
-  });
-
-  const posts: Post[] = await res.json();
-
-  return (
-    <>
-      <h1>سلام، رفیق! قطعاً</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
-    </>
-  );
+export default function Home(): ReactElement {
+  return <h1>سلام، رفیق!</h1>;
 }

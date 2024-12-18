@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  padding-block: 1rem;
+
+  .logo {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  nav {
+    margin-inline-start: auto;
+
+    > ul {
+      display: flex;
+      gap: 2rem;
+
+      > li {
+        a {
+          &.active {
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+}
