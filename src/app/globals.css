@@ -1,12 +1,14 @@
 :root {
-  --color-gray-98: hsl(120deg 8% 98%);
-  --color-gray-90: hsl(120deg 8% 90%);
-  --color-gray-80: hsl(120deg 8% 80%);
-  --color-gray-70: hsl(120deg 8% 70%);
-  --color-gray-40: hsl(120deg 8% 40%);
-  --color-gray-30: hsl(120deg 8% 30%);
-  --color-gray-20: hsl(120deg 8% 20%);
-  --color-gray-10: hsl(120deg 8% 10%);
+  --color-gray-98: hsl(120deg 0% 98%);
+  --color-gray-90: hsl(120deg 0% 90%);
+  --color-gray-80: hsl(120deg 0% 80%);
+  --color-gray-70: hsl(120deg 0% 70%);
+  --color-gray-40: hsl(120deg 0% 40%);
+  --color-gray-30: hsl(120deg 0% 30%);
+  --color-gray-20: hsl(120deg 0% 20%);
+  --color-gray-16: hsl(120deg 0% 16%);
+  --color-gray-12: hsl(120deg 0% 12%);
+  --color-gray-10: hsl(120deg 0% 10%);
 
   --color-default-background: var(--color-gray-10);
   --color-default-foreground: var(--color-gray-98);
@@ -58,6 +60,10 @@ ul {
   list-style: none;
 }
 
+p {
+  color: var(--color-gray-80);
+}
+
 a {
   color: inherit;
 
@@ -71,7 +77,18 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
 
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+
   > * {
     padding-inline: var(--full-width-padding-inline);
+  }
+
+  .tagline {
+    background-color: var(--color-gray-16);
+
+    padding-block: 1rem;
+
+    text-align: center;
   }
 }
