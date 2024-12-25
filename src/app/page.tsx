@@ -7,8 +7,6 @@ import MyDoctorLogo from "@/logo/my-doctor.logo";
 import styles from "./page.module.css";
 
 export default function Home(): ReactElement {
-  throw new Error("chiz");
-
   return (
     <div className={styles.home}>
       <h1>
