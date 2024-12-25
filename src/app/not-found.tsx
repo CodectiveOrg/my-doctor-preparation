@@ -4,8 +4,9 @@ import Image from "next/image";
 
 import notFoundImage from "@/assets/illustrations/not-found.svg";
 
-import styles from "./not-found.module.css";
 import GlobalSearchBoxComponent from "@/components/global-search-box/global-search-box.component";
+
+import styles from "./not-found.module.css";
 
 export default function NotFound(): ReactElement {
   return (
@@ -14,7 +15,7 @@ export default function NotFound(): ReactElement {
         <div className={styles["status-code"]}>404</div>
         <h1>صفحه‌ی مورد نظر پیدا نشد!</h1>
         <p>
-          با عرض پوزش, لطفاً از طریق کادر جستجو، پزشک یا مرکز درمانی مورد نظر
+          با عرض پوزش، لطفاً از طریق کادر جستجو، پزشک یا مرکز درمانی مورد نظر
           خود را جستجو کنید.
         </p>
       </div>
