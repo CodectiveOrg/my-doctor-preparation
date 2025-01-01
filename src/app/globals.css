@@ -19,6 +19,12 @@
   --color-primary-darker: hsl(120deg 50% 44%);
   --color-primary-opposite: var(--color-gray-10);
 
+  --color-danger: hsl(10deg 80% 48%);
+  --color-danger-fade: hsl(10deg 80% 96%);
+  --color-danger-lighter: hsl(10deg 80% 52%);
+  --color-danger-darker: hsl(10deg 80% 44%);
+  --color-danger-opposite: var(--color-gray-10);
+
   --color-star: hsl(50deg 100% 50%);
 
   --border-radius: 0.875rem;
