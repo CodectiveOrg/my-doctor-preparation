@@ -1,18 +1,16 @@
 import { doctors } from "@/mock/data/doctors";
 
+import { FiltersType } from "@/types/filters.type";
+
 import { DoctorModel } from "@/models/doctor.model";
 
-export async function fetchDoctors(
-  query?: string | string[],
-): Promise<DoctorModel[]> {
+export async function fetchDoctors({
+  query,
+}: FiltersType): Promise<DoctorModel[]> {
   await wait();
 
   if (!query) {
     return [...doctors];
-  }
-
-  if (Array.isArray(query)) {
-    query = query[0];
   }
 
   const normalizedQuery = query.toLowerCase();
