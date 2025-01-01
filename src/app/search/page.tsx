@@ -15,6 +15,7 @@ import FiltersProvider from "@/app/search/providers/filters.provider";
 import { FiltersType } from "@/types/filters.type";
 
 import styles from "./page.module.css";
+import StatsComponent from "@/app/search/components/stats/stats.component";
 
 type SearchParams = { [key: string]: string | string[] | undefined };
 
@@ -42,7 +43,9 @@ export default async function Page({
         <div className={styles.toolbar}>
           <SortComponent />
           <AppointmentFilterComponent />
-          <div className={styles.stats}></div>
+          <div className={styles.stats}>
+            <StatsComponent />
+          </div>
         </div>
         <div className={styles.results}>
           <ResultsComponent />

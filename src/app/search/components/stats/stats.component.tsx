@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactElement, useContext } from "react";
 
 import { FiltersContext } from "@/app/search/providers/filters.provider";
