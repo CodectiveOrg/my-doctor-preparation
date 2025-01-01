@@ -3,6 +3,7 @@
   grid-template-areas: ". search" "filters toolbar" "filters results";
   grid-template-columns: 1fr 4fr;
   grid-template-rows: auto auto 1fr;
+  align-items: start;
   gap: 1rem;
 
   margin-block-end: 2rem;
