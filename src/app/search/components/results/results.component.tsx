@@ -42,8 +42,12 @@ export default function ResultsComponent(): ReactElement {
           <div className={styles.actions}>
             <div className={styles.rating}>
               <MingcuteStarFill className={styles.icon} />{" "}
-              <span>{Math.floor(doctor.averageRating * 10) / 10}</span>{" "}
-              <span>({doctor.totalVotes} نظر)</span>
+              <span className={styles["average-rating"]}>
+                {Math.floor(doctor.averageRating * 10) / 10}
+              </span>{" "}
+              <span className={styles["total-votes"]}>
+                ({doctor.totalVotes} نظر)
+              </span>
             </div>
             <div className={styles.caption}>
               اولین نوبت: {doctor.firstAvailableAppointment}

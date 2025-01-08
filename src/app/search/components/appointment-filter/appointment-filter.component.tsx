@@ -16,7 +16,9 @@ const options: SelectOptionType[] = [
 ];
 
 export default function AppointmentFilterComponent(): ReactElement {
-  const [selectedOption, setSelectedOption] = useState<SelectOptionType>();
+  const [selectedOption, setSelectedOption] = useState<SelectOptionType>(
+    options[0],
+  );
 
   return (
     <SelectComponent

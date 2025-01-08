@@ -20,7 +20,7 @@ type Props = {
   placeholder?: string;
   options: SelectOptionType[];
   selectedOption?: SelectOptionType;
-  onSelectedOptionChange?: (value: SelectOptionType | undefined) => void;
+  onSelectedOptionChange?: (value: SelectOptionType) => void;
   onIsOpenChange?: (value: boolean) => void;
 };
 

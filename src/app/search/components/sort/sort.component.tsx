@@ -15,13 +15,14 @@ const options: SelectOptionType[] = [
 ];
 
 export default function SortComponent(): ReactElement {
-  const [selectedOption, setSelectedOption] = useState<SelectOptionType>();
+  const [selectedOption, setSelectedOption] = useState<SelectOptionType>(
+    options[0],
+  );
 
   return (
     <SelectComponent
       floating
       title="مرتب‌سازی"
-      placeholder="مقداری را مشخص کنید"
       options={options}
       selectedOption={selectedOption}
       onSelectedOptionChange={setSelectedOption}

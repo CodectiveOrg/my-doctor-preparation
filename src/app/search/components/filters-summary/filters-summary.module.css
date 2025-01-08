@@ -18,6 +18,8 @@
     border: none;
     border-radius: var(--border-radius);
 
+    font-size: var(--fz-300);
+
     cursor: pointer;
   }
 }
