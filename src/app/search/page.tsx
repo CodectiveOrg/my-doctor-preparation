@@ -2,6 +2,10 @@ import { ReactElement } from "react";
 
 import GlobalSearchBoxComponent from "@/components/global-search-box/global-search-box.component";
 
+import { doctors } from "@/mock/doctors";
+
+import { FiltersType } from "@/types/filters.type";
+
 import AppointmentFilterComponent from "@/app/search/components/appointment-filter/appointment-filter.component";
 import DegreeFilterComponent from "@/app/search/components/degree-filter/degree-filter.component";
 import ExpertiseFilterComponent from "@/app/search/components/expertise-filter/expertise-filter.component";
@@ -11,9 +15,8 @@ import ResultsComponent from "@/app/search/components/results/results.component"
 import SortComponent from "@/app/search/components/sort/sort.component";
 import StatsComponent from "@/app/search/components/stats/stats.component";
 
-import FiltersProvider from "@/app/search/providers/filters.provider";
-
-import { FiltersType } from "@/types/filters.type";
+import FiltersProvider from "@/app/search/providers/filters/filters.provider";
+import DoctorsProvider from "@/app/search/providers/doctors/doctors.provider";
 
 import styles from "./page.module.css";
 
@@ -26,39 +29,39 @@ type Props = {
 export default async function Page({
   searchParams,
 }: Props): Promise<ReactElement> {
-  const defaultFilters = await generateDefaultFilters(await searchParams);
+  const defaultFilters = generateDefaultFilters(await searchParams);
 
   return (
     <FiltersProvider defaultFilters={defaultFilters}>
-      <div className={styles.page}>
-        <div className={styles.search}>
-          <GlobalSearchBoxComponent />
-        </div>
-        <div className={styles.filters}>
-          <FiltersSummaryComponent />
-          <ExpertiseFilterComponent />
-          <GenderFilterComponent />
-          <DegreeFilterComponent />
-        </div>
-        <div className={styles.toolbar}>
-          <SortComponent />
-          <AppointmentFilterComponent />
-          <div className={styles.stats}>
-            <StatsComponent />
+      <DoctorsProvider doctors={doctors}>
+        <div className={styles.page}>
+          <div className={styles.search}>
+            <GlobalSearchBoxComponent />
+          </div>
+          <div className={styles.filters}>
+            <FiltersSummaryComponent />
+            <ExpertiseFilterComponent />
+            <GenderFilterComponent />
+            <DegreeFilterComponent />
+          </div>
+          <div className={styles.toolbar}>
+            <SortComponent />
+            <AppointmentFilterComponent />
+            <div className={styles.stats}>
+              <StatsComponent />
+            </div>
+          </div>
+          <div className={styles.results}>
+            <ResultsComponent />
           </div>
         </div>
-        <div className={styles.results}>
-          <ResultsComponent />
-        </div>
-      </div>
+      </DoctorsProvider>
     </FiltersProvider>
   );
 }
 
-async function generateDefaultFilters(
-  searchParams: SearchParams,
-): Promise<FiltersType> {
-  const { query, expertise, gender, appointment, degree } = await searchParams;
+function generateDefaultFilters(searchParams: SearchParams): FiltersType {
+  const { query, expertise, gender, appointment, degree } = searchParams;
 
   return {
     query: normalizeFilter(query),

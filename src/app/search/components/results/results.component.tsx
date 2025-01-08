@@ -4,18 +4,19 @@ import { ReactElement, useContext } from "react";
 
 import Link from "next/link";
 
-import { FiltersContext } from "@/app/search/providers/filters.provider";
-
-import styles from "./results.module.css";
 import MingcuteStarFill from "@/icons/MingcuteStarFill";
 import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
 
+import { DoctorsContext } from "@/app/search/providers/doctors/doctors.provider";
+
+import styles from "./results.module.css";
+
 export default function ResultsComponent(): ReactElement {
-  const { doctors } = useContext(FiltersContext);
+  const { filteredDoctors } = useContext(DoctorsContext);
 
   return (
     <ul className={styles.results}>
-      {doctors.map((doctor) => (
+      {filteredDoctors.map((doctor) => (
         <li key={doctor.id}>
           <div className={styles.header}>
             <div className={styles.image}>
