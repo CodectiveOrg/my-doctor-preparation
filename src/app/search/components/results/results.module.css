@@ -3,7 +3,7 @@
   gap: 1rem;
 
   > li {
-    background-color: var(--color-gray-16);
+    background-color: var(--color-surface-2);
 
     display: grid;
     gap: 1rem;

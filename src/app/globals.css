@@ -10,8 +10,10 @@
   --color-gray-12: hsl(0deg 0% 12%);
   --color-gray-10: hsl(0deg 0% 10%);
 
-  --color-default-background: var(--color-gray-10);
-  --color-default-foreground: var(--color-gray-98);
+  --color-surface-1: var(--color-gray-10);
+  --color-surface-2: var(--color-gray-12);
+
+  --color-text: var(--color-gray-98);
 
   --color-primary: hsl(120deg 50% 48%);
   --color-primary-fade: hsl(120deg 50% 96%);
@@ -79,8 +81,8 @@ a {
 }
 
 body {
-  background-color: var(--color-default-background);
-  color: var(--color-default-foreground);
+  background-color: var(--color-surface-1);
+  color: var(--color-text);
 
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -95,7 +97,7 @@ body {
   }
 
   .tagline {
-    background-color: var(--color-gray-16);
+    background-color: var(--color-surface-2);
 
     padding-block: 1rem;
 

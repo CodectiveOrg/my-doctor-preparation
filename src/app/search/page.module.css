@@ -6,7 +6,7 @@
   align-items: start;
   gap: 1rem;
 
-  margin-block-end: 2rem;
+  margin-block: 2rem;
 
   .search {
     grid-area: search;
