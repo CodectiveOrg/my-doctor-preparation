@@ -1,0 +1,11 @@
+.wrapper {
+  background-color: var(--color-surface-700);
+  box-shadow: var(--shadow-400);
+
+  display: flex;
+  gap: 0.5rem;
+
+  padding: 0.75rem;
+
+  border-radius: var(--border-radius);
+}

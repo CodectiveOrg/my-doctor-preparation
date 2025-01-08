@@ -1,6 +1,8 @@
-import { ReactElement } from "react";
+"use client";
 
-import SelectComponent from "@/components/select/select.component";
+import { ReactElement, useState } from "react";
+
+import FloatingSelectComponent from "@/components/floating-select/floating-select.component";
 
 import { SelectOptionType } from "@/types/select-option.type";
 
@@ -14,5 +16,14 @@ const options: SelectOptionType[] = [
 ];
 
 export default function AppointmentFilterComponent(): ReactElement {
-  return <SelectComponent title="نزدیک‌ترین نوبت" options={options} />;
+  const [selectedOption, setSelectedOption] = useState<SelectOptionType>();
+
+  return (
+    <FloatingSelectComponent
+      title="نزدیک‌ترین نوبت"
+      options={options}
+      value={selectedOption}
+      onChange={setSelectedOption}
+    />
+  );
 }

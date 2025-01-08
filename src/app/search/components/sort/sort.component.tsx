@@ -1,6 +1,8 @@
-import { ReactElement } from "react";
+"use client";
 
-import SelectComponent from "@/components/select/select.component";
+import { ReactElement, useState } from "react";
+
+import FloatingSelectComponent from "@/components/floating-select/floating-select.component";
 
 import { SelectOptionType } from "@/types/select-option.type";
 
@@ -13,5 +15,15 @@ const options: SelectOptionType[] = [
 ];
 
 export default function SortComponent(): ReactElement {
-  return <SelectComponent title="مرتب‌سازی" options={options} />;
+  const [selectedOption, setSelectedOption] = useState<SelectOptionType>();
+
+  return (
+    <FloatingSelectComponent
+      title="مرتب‌سازی"
+      placeholder="مقداری را مشخص کنید"
+      options={options}
+      value={selectedOption}
+      onChange={setSelectedOption}
+    />
+  );
 }

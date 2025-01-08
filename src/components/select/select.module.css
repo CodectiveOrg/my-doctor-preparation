@@ -1,11 +1,70 @@
-.wrapper {
-  background-color: var(--color-surface-700);
-  box-shadow: var(--shadow-400);
+.container {
+  position: relative;
 
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.5em;
 
-  padding: 0.75rem;
+  padding: 0.5rem;
 
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
+
+  outline: none;
+
+  .value {
+    flex: 1 1 0;
+  }
+
+  .caret {
+    border: 0.25em solid transparent;
+    border-block-start-color: var(--color-border);
+
+    transform: translateY(25%);
+  }
+
+  .options {
+    background-color: var(--color-surface-700);
+    box-shadow: var(--shadow-400);
+
+    position: absolute;
+    inset-block-start: calc(100% + 0.5rem);
+    inset-inline-start: 0;
+    overflow-y: auto;
+    z-index: 100;
+
+    max-block-size: 15rem;
+    min-inline-size: 100%;
+    inline-size: max-content;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+
+    .option {
+      padding: 0.25rem 0.5rem;
+
+      cursor: pointer;
+
+      &.highlighted {
+        background-color: var(--color-surface-300);
+      }
+
+      &.selected {
+        background-color: var(--color-primary);
+        color: var(--color-primary-opposite);
+      }
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  &:focus {
+    border-color: var(--color-primary);
+
+    .caret {
+      border-block-start-color: var(--color-primary);
+    }
+  }
 }
