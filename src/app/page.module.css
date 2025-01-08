@@ -14,7 +14,7 @@
     font-size: var(--fz-700);
 
     svg {
-      font-size: var(--fz-500);
+      font-size: 1.5em;
     }
   }
 
