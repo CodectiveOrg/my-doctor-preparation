@@ -29,7 +29,7 @@
   --color-danger-fade: hsl(10deg 80% 96%);
   --color-danger-lighter: hsl(10deg 80% 52%);
   --color-danger-darker: hsl(10deg 80% 44%);
-  --color-danger-opposite: var(--color-gray-10);
+  --color-danger-opposite: var(--color-gray-99);
 
   --color-star: hsl(50deg 100% 50%);
 
@@ -65,6 +65,8 @@
 
 html {
   color-scheme: light;
+  accent-color: var(--color-primary);
+  caret-color: var(--color-primary);
 }
 
 input,
