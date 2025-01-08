@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): ReactElement {
   return (
-    <html lang="fa" dir="rtl" className={vazirmatn.className + " chiz"}>
+    <html lang="fa" dir="rtl" className={vazirmatn.className}>
       <body>
         <HeaderComponent />
         <main>{children}</main>
