@@ -1,21 +1,33 @@
-import { ReactElement } from "react";
+"use client";
+
+import { ReactElement, useContext } from "react";
 
 import RadioFilterComponent from "@/app/search/components/radio-filter/radio-filter.component";
 
+import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
+
 export default function DegreeFilterComponent(): ReactElement {
+  const { filters, dispatchFilters } = useContext(FiltersContext);
+
+  const changeHandler = (value: string): void => {
+    dispatchFilters({ type: "updated_filter", key: "degree", value });
+  };
+
   return (
     <RadioFilterComponent
       title="درجه علمی"
       name="gender"
       options={[
-        { value: "Fellowship", label: "فلوشیپ" },
-        { value: "Subspecialty", label: "فوق تخصص" },
-        { value: "PhD", label: "دکترای تخصصی" },
-        { value: "Specialist", label: "متخصص" },
-        { value: "Doctorate", label: "دکتری" },
-        { value: "Master's Degree", label: "کارشناس ارشد" },
-        { value: "Bachelor's Degree", label: "کارشناس" },
+        { value: "فلوشیپ", label: "فلوشیپ" },
+        { value: "فوق تخصص", label: "فوق تخصص" },
+        { value: "دکترای تخصصی", label: "دکترای تخصصی" },
+        { value: "متخصص", label: "متخصص" },
+        { value: "دکتری", label: "دکتری" },
+        { value: "کارشناس ارشد", label: "کارشناس ارشد" },
+        { value: "کارشناس", label: "کارشناس" },
       ]}
+      value={filters.degree}
+      onChange={changeHandler}
     />
   );
 }

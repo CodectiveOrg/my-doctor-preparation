@@ -61,13 +61,12 @@ export default async function Page({
 }
 
 function generateDefaultFilters(searchParams: SearchParams): FiltersType {
-  const { query, expertise, gender, appointment, degree } = searchParams;
+  const { query, expertise, gender, degree } = searchParams;
 
   return {
     query: normalizeFilter(query),
     expertise: normalizeFilter(expertise),
     gender: normalizeFilter(gender),
-    appointment: normalizeFilter(appointment),
     degree: normalizeFilter(degree),
   };
 }

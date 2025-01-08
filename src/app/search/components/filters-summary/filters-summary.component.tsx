@@ -15,11 +15,7 @@ export default function FiltersSummaryComponent(): ReactElement | null {
 
   const isEmpty = useMemo(() => {
     return (
-      !filters.query &&
-      !filters.expertise &&
-      !filters.gender &&
-      !filters.appointment &&
-      !filters.degree
+      !filters.query && !filters.expertise && !filters.gender && !filters.degree
     );
   }, [filters]);
 
@@ -56,11 +52,6 @@ export default function FiltersSummaryComponent(): ReactElement | null {
           {filters.gender && (
             <li onClick={() => filterClickHandler("gender")}>
               {filters.gender}
-            </li>
-          )}
-          {filters.appointment && (
-            <li onClick={() => filterClickHandler("appointment")}>
-              {filters.appointment}
             </li>
           )}
           {filters.degree && (
