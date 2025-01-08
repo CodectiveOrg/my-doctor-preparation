@@ -39,7 +39,7 @@
         a {
           color: var(--color-text-700);
 
-          font-size: var(--fz-500);
+          font-size: 1.5em;
         }
       }
     }
