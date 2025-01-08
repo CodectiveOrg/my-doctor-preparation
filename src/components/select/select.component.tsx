@@ -15,17 +15,23 @@ import { SelectOptionType } from "@/types/select-option.type";
 import styles from "./select.module.css";
 
 type Props = {
+  floating?: boolean;
+  title?: string;
   placeholder?: string;
   options: SelectOptionType[];
   selectedOption?: SelectOptionType;
-  onChange: (value: SelectOptionType | undefined) => void;
+  onSelectedOptionChange?: (value: SelectOptionType | undefined) => void;
+  onIsOpenChange?: (value: boolean) => void;
 };
 
 export default function SelectComponent({
+  floating,
+  title,
   placeholder,
   options,
   selectedOption,
-  onChange,
+  onSelectedOptionChange,
+  onIsOpenChange,
 }: Props): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
@@ -42,10 +48,10 @@ export default function SelectComponent({
   const selectOption = useCallback(
     (option: SelectOptionType): void => {
       if (option !== selectedOption) {
-        onChange(option);
+        onSelectedOptionChange?.(option);
       }
     },
-    [onChange, selectedOption],
+    [onSelectedOptionChange, selectedOption],
   );
 
   const optionClickHandler = (
@@ -62,7 +68,9 @@ export default function SelectComponent({
     if (isOpen) {
       setHighlightedIndex(0);
     }
-  }, [isOpen]);
+
+    onIsOpenChange?.(isOpen);
+  }, [isOpen, onIsOpenChange]);
 
   useEffect(() => {
     const containerElement = containerRef.current;
@@ -127,8 +135,14 @@ export default function SelectComponent({
       onBlur={() => setIsOpen(false)}
       onClick={() => setIsOpen((old) => !old)}
       tabIndex={0}
-      className={styles.container}
+      className={clsx(
+        styles.container,
+        isOpen && styles.open,
+        floating && styles.floating,
+      )}
     >
+      {title && <span className={styles.title}>{title}: </span>}
+
       <span
         className={styles.value}
         style={{
@@ -137,9 +151,10 @@ export default function SelectComponent({
       >
         {selectedOption?.label ?? placeholder ?? String.fromCharCode(160)}
       </span>
+
       <div className={styles.caret}></div>
 
-      <ul className={clsx(styles.options, !isOpen && styles.hidden)}>
+      <ul className={styles.options}>
         {options.map((option, index) => (
           <li
             key={option.value}

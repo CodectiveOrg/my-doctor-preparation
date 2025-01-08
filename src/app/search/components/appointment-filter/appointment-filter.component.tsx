@@ -2,7 +2,7 @@
 
 import { ReactElement, useState } from "react";
 
-import FloatingSelectComponent from "@/components/floating-select/floating-select.component";
+import SelectComponent from "@/components/select/select.component";
 
 import { SelectOptionType } from "@/types/select-option.type";
 
@@ -19,11 +19,12 @@ export default function AppointmentFilterComponent(): ReactElement {
   const [selectedOption, setSelectedOption] = useState<SelectOptionType>();
 
   return (
-    <FloatingSelectComponent
+    <SelectComponent
+      floating
       title="نزدیک‌ترین نوبت"
       options={options}
-      value={selectedOption}
-      onChange={setSelectedOption}
+      selectedOption={selectedOption}
+      onSelectedOptionChange={setSelectedOption}
     />
   );
 }

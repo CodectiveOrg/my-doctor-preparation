@@ -12,6 +12,13 @@
 
   outline: none;
 
+  cursor: default;
+
+  .title {
+    font-size: var(--fz-300);
+    font-weight: 700;
+  }
+
   .value {
     flex: 1 1 0;
   }
@@ -54,17 +61,29 @@
         color: var(--color-primary-opposite);
       }
     }
+  }
 
-    &.hidden {
+  &:not(&.open) {
+    .options {
       display: none;
     }
   }
 
-  &:focus {
+  &:focus,
+  &.open {
     border-color: var(--color-primary);
 
     .caret {
       border-block-start-color: var(--color-primary);
+    }
+  }
+
+  &.floating {
+    background-color: var(--color-surface-700);
+    box-shadow: var(--shadow-400);
+
+    &:not(&:focus, &.open) {
+      border-color: transparent;
     }
   }
 }
