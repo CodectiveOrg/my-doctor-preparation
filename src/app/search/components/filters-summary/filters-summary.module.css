@@ -22,4 +22,42 @@
 
     cursor: pointer;
   }
+
+  .filters {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    > li {
+      background-color: var(--color-surface-700);
+      box-shadow: var(--shadow-400);
+
+      position: relative;
+      overflow: hidden;
+
+      padding: 0.25rem 0.75rem;
+
+      border-radius: 999rem;
+
+      cursor: pointer;
+
+      &:hover {
+        &::after {
+          content: "x";
+
+          background-color: var(--color-danger);
+          color: var(--color-danger-opposite);
+
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+
+          display: grid;
+          place-content: center;
+        }
+      }
+    }
+  }
 }

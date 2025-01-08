@@ -1,6 +1,10 @@
-import { ReactElement } from "react";
+"use client";
+
+import { ReactElement, useContext } from "react";
 
 import CardComponent from "@/components/card/card.component";
+
+import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 
 import styles from "./expertise-filter.module.css";
 
@@ -43,12 +47,20 @@ const options: string[] = [
 ];
 
 export default function ExpertiseFilterComponent(): ReactElement {
+  const { dispatchFilters } = useContext(FiltersContext);
+
+  const buttonClickHandler = (value: string): void => {
+    dispatchFilters({ type: "updated_filter", key: "expertise", value });
+  };
+
   return (
     <CardComponent>
       <ul className={styles["expertise-filter"]}>
         {options.map((x) => (
           <li key={x}>
-            <button type="button">{x}</button>
+            <button type="button" onClick={() => buttonClickHandler(x)}>
+              {x}
+            </button>
           </li>
         ))}
       </ul>

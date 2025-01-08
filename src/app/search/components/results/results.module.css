@@ -50,7 +50,14 @@
       .brief {
         grid-area: brief;
 
+        overflow: hidden;
+
+        max-inline-size: 100%;
+
         font-size: var(--fz-300);
+
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
 
         color: var(--color-text-700);
       }
