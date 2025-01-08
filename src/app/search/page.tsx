@@ -36,7 +36,7 @@ export default async function Page({
       <DoctorsProvider doctors={doctors}>
         <div className={styles.page}>
           <div className={styles.search}>
-            <GlobalSearchBoxComponent defaultValue={defaultFilters.query} />
+            <GlobalSearchBoxComponent />
           </div>
           <div className={styles.filters}>
             <FiltersSummaryComponent />

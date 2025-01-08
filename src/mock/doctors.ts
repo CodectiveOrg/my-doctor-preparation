@@ -163,7 +163,7 @@ export const doctors: DoctorModel[] = [
     image:
       "/getImage/p24/search-men/8c981c886725e524c0e0f100ff25f22c.jpg?size=150",
     isVerified: true,
-    gender: "خانم",
+    gender: "آقا",
     averageRating: 4.83,
     totalVotes: 699,
     address: "تهران,تهران، ولیعصر، حق شناس، پلاک پنج، طبقه همکف",
@@ -212,7 +212,7 @@ export const doctors: DoctorModel[] = [
     image:
       "/getImage/p24/search-men/e03322586ab83ce88cbc98c2195157e8.jpg?size=150",
     isVerified: true,
-    gender: "خانم",
+    gender: "آقا",
     averageRating: 4.41,
     totalVotes: 92,
     address: "تبریز,والمان، روبروی هتل فرید",
@@ -262,7 +262,7 @@ export const doctors: DoctorModel[] = [
     image:
       "/getImage/p24/search-men/ffe01df9c737d76a59ddd88b564f993e.jpg?size=150",
     isVerified: true,
-    gender: "خانم",
+    gender: "آقا",
     averageRating: 4.73,
     totalVotes: 32,
     address:
@@ -313,7 +313,7 @@ export const doctors: DoctorModel[] = [
     image:
       "/getImage/p24/search-women/5ba7fa66fb0fc8ab18d19675b1c9347d.jpg?size=150",
     isVerified: true,
-    gender: "خانم",
+    gender: "آقا",
     averageRating: 4.92,
     totalVotes: 108,
     address: "تهران,تهران، سعادت آباد، خیابان دوم شمالی",
