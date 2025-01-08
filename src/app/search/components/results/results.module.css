@@ -3,7 +3,8 @@
   gap: 1rem;
 
   > li {
-    background-color: var(--color-surface-2);
+    background-color: var(--color-surface-700);
+    box-shadow: var(--shadow-400);
 
     display: grid;
     gap: 1rem;
@@ -82,7 +83,7 @@
       font-size: var(--fz-200);
 
       .badge {
-        background-color: var(--color-gray-30);
+        background-color: var(--color-surface-400);
 
         padding: 0.25rem 0.75rem;
 
