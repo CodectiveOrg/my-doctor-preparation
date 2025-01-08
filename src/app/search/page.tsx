@@ -9,13 +9,13 @@ import FiltersSummaryComponent from "@/app/search/components/filters-summary/fil
 import GenderFilterComponent from "@/app/search/components/gender-filter/gender-filter.component";
 import ResultsComponent from "@/app/search/components/results/results.component";
 import SortComponent from "@/app/search/components/sort/sort.component";
+import StatsComponent from "@/app/search/components/stats/stats.component";
 
 import FiltersProvider from "@/app/search/providers/filters.provider";
 
 import { FiltersType } from "@/types/filters.type";
 
 import styles from "./page.module.css";
-import StatsComponent from "@/app/search/components/stats/stats.component";
 
 type SearchParams = { [key: string]: string | string[] | undefined };
 
