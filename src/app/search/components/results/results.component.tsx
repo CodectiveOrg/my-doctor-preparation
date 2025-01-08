@@ -28,23 +28,23 @@ export default function ResultsComponent(): ReactElement {
             </div>
             <div className={styles.name}>{doctor.name}</div>
             <div className={styles.brief}>{doctor.brief}</div>
-            <div className={styles.rating}>
-              <MingcuteStarFill className={styles.icon} />{" "}
-              <span>{Math.floor(doctor.averageRating * 10) / 10}</span>{" "}
-              <span>({doctor.totalVotes} نظر)</span>
+            <div className={styles.badges}>
+              {doctor.badges.map((badge) => (
+                <div key={badge} className={styles.badge}>
+                  {badge}
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.address}>
             <MingcuteLocationLine /> آدرس: {doctor.address}
           </div>
-          <div className={styles.badges}>
-            {doctor.badges.map((badge) => (
-              <div key={badge} className={styles.badge}>
-                {badge}
-              </div>
-            ))}
-          </div>
           <div className={styles.actions}>
+            <div className={styles.rating}>
+              <MingcuteStarFill className={styles.icon} />{" "}
+              <span>{Math.floor(doctor.averageRating * 10) / 10}</span>{" "}
+              <span>({doctor.totalVotes} نظر)</span>
+            </div>
             <div className={styles.caption}>
               اولین نوبت: {doctor.firstAvailableAppointment}
             </div>
