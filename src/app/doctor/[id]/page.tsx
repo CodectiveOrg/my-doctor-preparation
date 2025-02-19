@@ -1,22 +1,21 @@
 import { ReactElement } from "react";
-
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
-import MingcuteStarFill from "@/icons/MingcuteStarFill";
 
 import { doctors } from "@/mock/doctors";
 
-import { DoctorModel } from "@/models/doctor.model";
+import { DetailedDoctorModel } from "@/models/detailed-doctor.model";
+
+import AboutComponent from "./components/about/about.component";
+import AbstractComponent from "./components/abstract/abstract.component";
+import ActivitiesComponent from "./components/activities/activities.component";
+import AppointmentComponent from "./components/appointment/appointment.component";
+import CommentComponent from "./components/comment/comment.component";
+import ContactComponent from "./components/contact/contact.component";
 
 import styles from "./page.module.css";
 
-type Params = { id: string };
-
 type Props = {
-  params: Params;
+  params: { id: string };
 };
 
 export default async function Page({ params }: Props): Promise<ReactElement> {
@@ -28,52 +27,87 @@ export default async function Page({ params }: Props): Promise<ReactElement> {
 
   return (
     <div className={styles.page}>
-      <div className={styles.header}>
-        <div className={styles.image}>
-          <Image
-            src={`https://cdn.paziresh24.com${doctor.image}`}
-            alt="عکس پروفایل دکتر"
-            width={150}
-            height={150}
-          />
-        </div>
-        <div className={styles.name}>{doctor.name}</div>
-        <div className={styles.brief}>{doctor.brief}</div>
-        <div className={styles.badges}>
-          {doctor.badges.map((badge) => (
-            <div key={badge} className={styles.badge}>
-              {badge}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles.address}>
-        <MingcuteLocationLine /> آدرس: {doctor.address}
+      <div className={styles.info}>
+        <AbstractComponent doctor={doctor} />
+        <AboutComponent doctor={doctor} />
+        <ActivitiesComponent doctor={doctor} />
+        {doctor.comments.map((comment) => (
+          <CommentComponent key={comment.id} comment={comment} />
+        ))}
       </div>
       <div className={styles.actions}>
-        <div className={styles.rating}>
-          <MingcuteStarFill className={styles.icon} />{" "}
-          <span className={styles["average-rating"]}>
-            {Math.floor(doctor.averageRating * 10) / 10}
-          </span>{" "}
-          <span className={styles["total-votes"]}>
-            ({doctor.totalVotes} نظر)
-          </span>
-        </div>
-        <div className={styles.caption}>
-          اولین نوبت: {doctor.firstAvailableAppointment}
-        </div>
-        <Link href={`/doctor/${doctor.id}`}>نوبت‌دهی آنلاین</Link>
+        <AppointmentComponent doctor={doctor} />
+        <ContactComponent doctor={doctor} />
       </div>
     </div>
   );
 }
 
-async function getDoctor(id: string): Promise<DoctorModel | undefined> {
+async function getDoctor(id: string): Promise<DetailedDoctorModel | undefined> {
   return new Promise((resolve) => {
     setTimeout(() => {
       const result = doctors.find((x) => x.id === id);
-      resolve(result);
-    }, 10000);
+
+      if (!result) {
+        return resolve(result);
+      }
+
+      resolve({
+        ...result,
+        experience: 29,
+        mcNumber: 58549,
+        about: [
+          "29 سال سابقه طبابت",
+          "رتبه برتر بورد تخصص از دانشگاه علوم پزشکی شهید بهشتی",
+          "ویزیت آنلاین و‌ حضوری متخصص عفونی در زمینه های:",
+          "مشاوره و درمان زخمهای مزمن، عروقی و زخم پای دیابتی با روش های نوین",
+        ].join("\n"),
+        consultations: 11995,
+        membershipDuration: "4 سال و 1 ماه",
+        price: 300_000,
+        phone: "021-26200832",
+        comments: [
+          {
+            id: "1",
+            user: {
+              id: "1",
+              username: "karen",
+              name: "کارن",
+            },
+            date: new Date(Date.now() - 5 * 24 * 3600 * 1000),
+            rating: 5,
+            text: [
+              "علت مراجعه ما عفونت بعد از عمل جراحی بود. همسر من سه ماه پیش دچار شکستگی استخوان ران شد که متاسفانه در شهرستان بعد از جراحی دچار عفونت شدید محل عمل جراحی شد، هیچ پزشک دیگری هم به ما پذیرش نمیداد",
+            ].join("\n"),
+          },
+          {
+            id: "2",
+            user: {
+              id: "2",
+              username: "azizeh",
+              name: "عزیزه",
+            },
+            date: new Date(Date.now() - 17 * 24 * 3600 * 1000),
+            rating: 4,
+            text: [
+              "بیماری من با سرفه و‌ تب و لرز و بیحالی و‌ بدن درد شروع شد سرفه های شدیدی داشتم کم کم تنگی نفس هم پیدا کردم‌ دکتر دستگیر وقتی کامل معاینه کردند گفتند ویروس جدید کرونا هست",
+            ].join("\n"),
+          },
+          {
+            id: "3",
+            user: {
+              id: "3",
+              username: "alemeh",
+              name: "عالمه",
+            },
+            date: new Date(Date.now() - 21 * 24 * 3600 * 1000),
+            rating: 5,
+            text: [
+              "آقای دکتر بسیار با دقت و صبوری، به سوالات پاسخ میدهند، شرایط سنی بیمار و داروی مناسب برای سن بیمارشان رو حتما در نظر میگیرن. با صحبتهاشون، آرامش رو به بیمارشان میدن.",
+            ].join("\n"),
+          },
+        ],
+      });
+    }, 0);
   });
 }
