@@ -1,11 +1,14 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-import jwt from "jsonwebtoken";
+import * as jose from "jose";
 
 import { ApiResponseType } from "@/types/api-response.type";
 
 type Result<T> = [error: null, data: T] | [error: string, data: null];
+
+const alg = "HS256";
+const secret = new TextEncoder().encode(process.env.TOKEN_SECRET!);
 
 export async function parseBody<T>(request: Request): Promise<Result<T>> {
   try {
@@ -41,24 +44,29 @@ export async function wrapWithTryCatch<T>(
   }
 }
 
-export function setAuthCookie(): void {
+export async function setAuthCookie(): Promise<void> {
   const cookieStore = cookies();
 
-  const payload = {};
-
-  const token = jwt.sign(payload, process.env.TOKEN_SECRET!, {
-    expiresIn: "3d",
-  });
+  const token = await new jose.SignJWT()
+    .setProtectedHeader({ alg })
+    .setIssuedAt()
+    .setExpirationTime("3d")
+    .sign(secret);
 
   cookieStore.set(process.env.TOKEN_KEY!, token, {
     secure: true,
     httpOnly: true,
     sameSite: "none",
-    maxAge: 3 * 24 * 3600 * 1000,
+    maxAge: 3 * 24 * 3600,
   });
 }
 
-export function isLoggedIn(request: NextRequest): boolean {
+export function removeAuthCookie(): void {
+  const cookieStore = cookies();
+  cookieStore.delete(process.env.TOKEN_KEY!);
+}
+
+export async function isLoggedIn(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get(process.env.TOKEN_KEY!)?.value;
 
   if (!token) {
@@ -66,8 +74,10 @@ export function isLoggedIn(request: NextRequest): boolean {
   }
 
   try {
-    return !!jwt.verify(token, process.env.TOKEN_SECRET!);
-  } catch {
+    await jose.jwtVerify(token, secret);
+    return true;
+  } catch (error) {
+    console.log(error);
     return false;
   }
 }

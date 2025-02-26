@@ -34,7 +34,7 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
       );
     }
 
-    setAuthCookie();
+    await setAuthCookie();
 
     return NextResponse.json({ data: null }, { status: 200 });
   });
