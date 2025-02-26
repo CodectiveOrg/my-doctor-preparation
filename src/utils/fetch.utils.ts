@@ -5,6 +5,7 @@ import { fetchDataType } from "@/types/api-response.type";
 export async function fetchWithToast<T>(
   input: RequestInfo | URL,
   init: RequestInit = {},
+  successMessage?: string,
 ): Promise<fetchDataType<T>> {
   const response = await fetch(input, {
     headers: { "Content-Type": "application/json" },
@@ -25,7 +26,9 @@ export async function fetchWithToast<T>(
     return { error: message };
   }
 
-  toast.success("ثبت‌نام با موفقیت انجام شد.");
+  if (successMessage) {
+    toast.success(successMessage);
+  }
 
   return { data };
 }

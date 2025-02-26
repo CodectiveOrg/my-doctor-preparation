@@ -1,29 +1,27 @@
 "use client";
 
-import { ReactElement, FormEvent } from "react";
+import { FormEvent, ReactElement } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import signUpImage from "@/assets/images/sign-up.webp";
+import signInImage from "@/assets/images/sign-in.webp";
 
 import { ButtonComponent } from "@/components/button/button.component";
 import CardComponent from "@/components/card/card.component";
 import NormalInputComponent from "@/components/normal-input/normal-input.component";
 import PasswordInputComponent from "@/components/password-input/password-input.component";
 
-import { SignUpDto } from "@/dto/auth.dto";
+import { SignInDto } from "@/dto/auth.dto";
 
-import MingcuteIncognitoModeLine from "@/icons/MingcuteIncognitoModeLine";
 import MingcuteUser3Line from "@/icons/MingcuteUser3Line";
-import MingcuteMailLine from "@/icons/MingcuteMailLine";
 
 import { fetchWithToast } from "@/utils/fetch.utils";
 
 import styles from "@/app/auth/styles/auth-form.module.css";
 
-export default function SignUpFormComponent(): ReactElement {
+export default function SignInFormComponent(): ReactElement {
   const router = useRouter();
 
   const formSubmitHandler = async (
@@ -33,20 +31,18 @@ export default function SignUpFormComponent(): ReactElement {
 
     const formData = new FormData(e.currentTarget);
 
-    const dto: SignUpDto = {
-      name: formData.get("name") as string,
+    const dto: SignInDto = {
       username: formData.get("username") as string,
-      email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
 
     const result = await fetchWithToast(
-      "/api/auth/sign-up",
+      "/api/auth/sign-in",
       {
         method: "POST",
         body: JSON.stringify(dto),
       },
-      "ثبت‌نام با موفقیت انجام شد.",
+      "ورود با موفقیت انجام شد.",
     );
 
     if (result.error) {
@@ -61,37 +57,25 @@ export default function SignUpFormComponent(): ReactElement {
       <CardComponent>
         <div className={styles["card-content"]}>
           <div className={styles.writings}>
-            <h1>ثبت‌نام!</h1>
+            <h1>ورود!</h1>
             <form onSubmit={formSubmitHandler}>
-              <NormalInputComponent
-                label="نام و نام خانوادگی"
-                type="text"
-                name="name"
-                prefixIcon={<MingcuteIncognitoModeLine />}
-              />
               <NormalInputComponent
                 label="نام کاربری"
                 type="text"
                 name="username"
                 prefixIcon={<MingcuteUser3Line />}
               />
-              <NormalInputComponent
-                label="ایمیل"
-                type="email"
-                name="email"
-                prefixIcon={<MingcuteMailLine />}
-              />
               <PasswordInputComponent label="رمز عبور" name="password" />
-              <ButtonComponent variant="primary">ثبت‌نام</ButtonComponent>
+              <ButtonComponent variant="primary">ورود</ButtonComponent>
             </form>
             <div className={styles["change-form"]}>
-              قبلاً ثبت‌نام کردید؟
+              قبلاً ثبت‌نام نکردید؟
               {` `}
-              <Link href="/auth/sign-in">وارد شوید</Link>.
+              <Link href="/auth/sign-up">ثبت‌نام کنید</Link>.
             </div>
           </div>
           <div className={styles.visuals}>
-            <Image src={signUpImage} alt="" />
+            <Image src={signInImage} alt="" />
           </div>
         </div>
       </CardComponent>
