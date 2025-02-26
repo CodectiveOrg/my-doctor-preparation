@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import jwt from "jsonwebtoken";
 
@@ -56,4 +56,18 @@ export function setAuthCookie(): void {
     sameSite: "none",
     maxAge: 3 * 24 * 3600 * 1000,
   });
+}
+
+export function isLoggedIn(request: NextRequest): boolean {
+  const token = request.cookies.get(process.env.TOKEN_KEY!)?.value;
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    return !!jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch {
+    return false;
+  }
 }
