@@ -4,7 +4,7 @@ import { SignUpDto } from "@/dto/auth.dto";
 
 import prisma from "@/lib/prisma";
 
-import { parseBody, wrapWithTryCatch } from "@/utils/api.utils";
+import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
 
 import { ApiResponseType } from "@/types/api-response.type";
 
@@ -36,6 +36,8 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
     }
 
     await prisma.user.create({ data: body });
+
+    setAuthCookie();
 
     return NextResponse.json({ data: null }, { status: 201 });
   });

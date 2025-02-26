@@ -1,4 +1,7 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+
+import jwt from "jsonwebtoken";
 
 import { ApiResponseType } from "@/types/api-response.type";
 
@@ -36,4 +39,21 @@ export async function wrapWithTryCatch<T>(
       { status: 500 },
     );
   }
+}
+
+export function setAuthCookie(): void {
+  const cookieStore = cookies();
+
+  const payload = {};
+
+  const token = jwt.sign(payload, process.env.TOKEN_SECRET!, {
+    expiresIn: "3d",
+  });
+
+  cookieStore.set(process.env.TOKEN_KEY!, token, {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
+    maxAge: 3 * 24 * 3600 * 1000,
+  });
 }
