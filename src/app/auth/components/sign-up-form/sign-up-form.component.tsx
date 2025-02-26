@@ -4,6 +4,9 @@ import { ReactElement, FormEvent } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { toast } from "react-toastify";
 
 import signUpImage from "@/assets/images/sign-up.webp";
 
@@ -18,9 +21,13 @@ import MingcuteIncognitoModeLine from "@/icons/MingcuteIncognitoModeLine";
 import MingcuteUser3Line from "@/icons/MingcuteUser3Line";
 import MingcuteMailLine from "@/icons/MingcuteMailLine";
 
+import { fetchWithToast } from "@/utils/fetch.utils";
+
 import styles from "./sign-up-form.module.css";
 
 export default function SignUpFormComponent(): ReactElement {
+  const router = useRouter();
+
   const formSubmitHandler = async (
     e: FormEvent<HTMLFormElement>,
   ): Promise<void> => {
@@ -35,21 +42,16 @@ export default function SignUpFormComponent(): ReactElement {
       password: formData.get("password") as string,
     };
 
-    const response = await fetch("/api/auth/sign-up", {
+    const result = await fetchWithToast("/api/auth/sign-up", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dto),
     });
 
-    console.log("response", { ...response });
-
-    if (!response.ok) {
+    if (result.error) {
       return;
     }
 
-    const data = await response.json();
-
-    console.log("data", { ...data });
+    router.push("/dashboard");
   };
 
   return (

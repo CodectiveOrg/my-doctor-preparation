@@ -1,3 +1,7 @@
+import { NextResponse } from "next/server";
+
+import { ApiResponseType } from "@/types/api-response.type";
+
 type Result<T> = [error: null, data: T] | [error: string, data: null];
 
 export async function parseBody<T>(request: Request): Promise<Result<T>> {
@@ -14,5 +18,22 @@ export async function parseBody<T>(request: Request): Promise<Result<T>> {
     }
 
     return ["Unknown error", null];
+  }
+}
+
+export async function wrapWithTryCatch<T>(
+  callback: () => Promise<ApiResponseType<T>>,
+): Promise<ApiResponseType<T>> {
+  try {
+    return await callback();
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    return NextResponse.json(
+      { error: "یه چی شد ولی نمیدونم چی." },
+      { status: 500 },
+    );
   }
 }
