@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import * as jose from "jose";
 
+import bcrypt from "bcrypt";
+
 import { ApiResponseType } from "@/types/api-response.type";
 
 type Result<T> = [error: null, data: T] | [error: string, data: null];
@@ -81,3 +83,15 @@ export async function isLoggedIn(request: NextRequest): Promise<boolean> {
     return false;
   }
 }
+
+export const hashPassword = async (password: string): Promise<string> => {
+  const salt = await bcrypt.genSalt();
+  return await bcrypt.hash(password, salt);
+};
+
+export const comparePasswords = async (
+  password: string,
+  hashed: string,
+): Promise<boolean> => {
+  return bcrypt.compare(password, hashed);
+};

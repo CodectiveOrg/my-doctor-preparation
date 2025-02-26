@@ -4,7 +4,12 @@ import { SignInDto } from "@/dto/auth.dto";
 
 import prisma from "@/lib/prisma";
 
-import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
+import {
+  comparePasswords,
+  parseBody,
+  setAuthCookie,
+  wrapWithTryCatch,
+} from "@/utils/api.utils";
 
 import { ApiResponseType } from "@/types/api-response.type";
 
@@ -27,7 +32,7 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
       );
     }
 
-    if (body.password !== foundUser.password) {
+    if (!(await comparePasswords(body.password, foundUser.password))) {
       return NextResponse.json(
         { error: "رمز عبور اشتباه است." },
         { status: 401 },
