@@ -4,12 +4,8 @@ import { SignInDto } from "@/dto/auth.dto";
 
 import prisma from "@/lib/prisma";
 
-import {
-  comparePasswords,
-  parseBody,
-  setAuthCookie,
-  wrapWithTryCatch,
-} from "@/utils/api.utils";
+import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
+import { comparePasswords } from "@/utils/bcrypt.utils";
 
 import { ApiResponseType } from "@/types/api-response.type";
 
