@@ -26,7 +26,6 @@ function PasswordInputComponent(
     <NormalInputComponent
       ref={ref}
       type={isVisible ? "text" : "password"}
-      autoComplete="new-password"
       prefixIcon={<MingcuteKey2Line />}
       suffixIcon={isVisible ? <MingcuteEyeCloseLine /> : <MingcuteEye2Line />}
       onSuffixClick={() => setIsVisible((old) => !old)}

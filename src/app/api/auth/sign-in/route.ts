@@ -4,10 +4,10 @@ import { SignInDto } from "@/dto/auth.dto";
 
 import prisma from "@/lib/prisma";
 
-import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
-import { comparePasswords } from "@/utils/bcrypt.utils";
-
 import { ApiResponseType } from "@/types/api-response.type";
+
+import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
+import { comparePassword } from "@/utils/bcrypt.utils";
 
 export async function POST(request: Request): Promise<ApiResponseType<null>> {
   return wrapWithTryCatch(async () => {
@@ -23,12 +23,12 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
 
     if (!foundUser) {
       return NextResponse.json(
-        { error: "کاربری با این مشخصات یافت نشد." },
-        { status: 400 },
+        { error: "کاربری با این مشخصات پیدا نشد." },
+        { status: 404 },
       );
     }
 
-    if (!(await comparePasswords(body.password, foundUser.password))) {
+    if (!(await comparePassword(body.password, foundUser.password))) {
       return NextResponse.json(
         { error: "رمز عبور اشتباه است." },
         { status: 401 },

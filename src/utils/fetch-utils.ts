@@ -12,13 +12,13 @@ export async function fetchWithToast<T>(
     ...init,
   });
 
-  const data = await response.json();
+  const result = await response.json();
 
   if (!response.ok) {
-    let message: string = "یه چی شد ولی نمیدونم چی.";
+    let message: string = "خطای غیرمنتظره رخ داد.";
 
-    if ("error" in data) {
-      message = data.error;
+    if ("error" in result) {
+      message = result.error;
     }
 
     toast.error(message);
@@ -30,5 +30,5 @@ export async function fetchWithToast<T>(
     toast.success(successMessage);
   }
 
-  return { data };
+  return { data: result.data };
 }

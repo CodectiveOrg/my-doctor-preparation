@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { ButtonComponent } from "@/components/button/button.component";
 
-import { fetchWithToast } from "@/utils/fetch.utils";
+import { fetchWithToast } from "@/utils/fetch-utils";
 
 import styles from "./page.module.css";
 
@@ -14,12 +14,12 @@ export default function Page(): ReactElement {
   const router = useRouter();
 
   const signOutButtonClickHandler = async (): Promise<void> => {
-    const result = await fetchWithToast(
+    const result = await fetchWithToast<null>(
       "/api/auth/sign-out",
       {
         method: "POST",
       },
-      "خروج با موفقیت انجام شد.",
+      "به امید دیدار!",
     );
 
     if (result.error) {

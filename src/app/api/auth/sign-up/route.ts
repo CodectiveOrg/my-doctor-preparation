@@ -4,10 +4,10 @@ import { SignUpDto } from "@/dto/auth.dto";
 
 import prisma from "@/lib/prisma";
 
+import { ApiResponseType } from "@/types/api-response.type";
+
 import { parseBody, setAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
 import { hashPassword } from "@/utils/bcrypt.utils";
-
-import { ApiResponseType } from "@/types/api-response.type";
 
 export async function POST(request: Request): Promise<ApiResponseType<null>> {
   return wrapWithTryCatch(async () => {

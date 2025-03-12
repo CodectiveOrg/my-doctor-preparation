@@ -12,13 +12,12 @@ export default function ToasterComponent(props: Props): ReactElement {
       hideProgressBar={false}
       newestOnTop
       closeOnClick={false}
-      rtl={false}
+      rtl
       pauseOnFocusLoss
       draggable
       pauseOnHover
       theme="light"
       transition={Bounce}
-      aria-label={undefined}
       {...props}
     />
   );

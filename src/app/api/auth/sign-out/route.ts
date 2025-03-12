@@ -6,7 +6,7 @@ import { removeAuthCookie, wrapWithTryCatch } from "@/utils/api.utils";
 
 export async function POST(): Promise<ApiResponseType<null>> {
   return wrapWithTryCatch(async () => {
-    removeAuthCookie();
+    await removeAuthCookie();
 
     return NextResponse.json({ data: null }, { status: 200 });
   });

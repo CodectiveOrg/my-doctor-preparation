@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, ReactElement } from "react";
+import { FormEvent, ReactElement, useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -17,12 +17,14 @@ import { SignInDto } from "@/dto/auth.dto";
 
 import MingcuteUser3Line from "@/icons/MingcuteUser3Line";
 
-import { fetchWithToast } from "@/utils/fetch.utils";
+import { fetchWithToast } from "@/utils/fetch-utils";
 
 import styles from "@/app/auth/styles/auth-form.module.css";
 
 export default function SignInFormComponent(): ReactElement {
   const router = useRouter();
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const formSubmitHandler = async (
     e: FormEvent<HTMLFormElement>,
@@ -36,19 +38,20 @@ export default function SignInFormComponent(): ReactElement {
       password: formData.get("password") as string,
     };
 
-    const result = await fetchWithToast(
+    const result = await fetchWithToast<null>(
       "/api/auth/sign-in",
       {
         method: "POST",
         body: JSON.stringify(dto),
       },
-      "ورود با موفقیت انجام شد.",
+      "خوش آمدید!",
     );
 
     if (result.error) {
       return;
     }
 
+    formRef.current?.reset();
     router.push("/dashboard");
   };
 
@@ -58,14 +61,18 @@ export default function SignInFormComponent(): ReactElement {
         <div className={styles["card-content"]}>
           <div className={styles.writings}>
             <h1>ورود!</h1>
-            <form onSubmit={formSubmitHandler}>
+            <form ref={formRef} onSubmit={formSubmitHandler}>
               <NormalInputComponent
                 label="نام کاربری"
                 type="text"
                 name="username"
                 prefixIcon={<MingcuteUser3Line />}
               />
-              <PasswordInputComponent label="رمز عبور" name="password" />
+              <PasswordInputComponent
+                label="رمز عبور"
+                name="password"
+                autoComplete="current-password"
+              />
               <ButtonComponent variant="primary">ورود</ButtonComponent>
             </form>
             <div className={styles["change-form"]}>
