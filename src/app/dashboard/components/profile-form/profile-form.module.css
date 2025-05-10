@@ -19,12 +19,4 @@
       grid-column: 1 / -1;
     }
   }
-
-  .change-form {
-    a {
-      color: var(--color-primary);
-
-      text-decoration: underline;
-    }
-  }
 }

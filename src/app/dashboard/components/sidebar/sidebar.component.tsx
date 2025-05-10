@@ -44,7 +44,7 @@ export default function SidebarComponent(): ReactElement {
 
   return (
     <aside className={styles.sidebar}>
-      <nav aria-label="Pages in Dasboard">
+      <nav aria-label="Pages in Dashboard">
         <ul>
           {items.map((item) => (
             <li
